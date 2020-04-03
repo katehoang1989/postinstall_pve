@@ -14,7 +14,7 @@ echo ""
 ####initialisation des variables
 
 # local
-export LANG="fr_FR.UTF-8"
+export LANG="en_US.UTF-8"
 export LC_ALL="C"
 
 ##mail de l'admin
@@ -74,18 +74,6 @@ sed -i 's/\#ftp\_proxy/ftp\_proxy/g' /etc/wgetrc
 sed -i 's/\#use\_proxy/use\_proxy/g' /etc/wgetrc
 
 echo 'Acquire::http::Proxy "http://'"$proxy"':'"$portproxy"'/";' > /etc/apt/apt.conf.d/76pveproxy
-fi
-
-##ajout du dépot pve-no-subscription et non-free
-echo -e '\033[1;33m Ajout du depot pve-no-subscription et non-free \033[0m'
-echo "deb http://download.proxmox.com/debian buster pve-no-subscription" > /etc/apt/sources.list.d/pve-enterprise.list
-
-grep 'non-free' /etc/apt/sources.list
-if [ $? = "1" ]
-then
-sed -i "s/main/main\\ non-free/g" /etc/apt/sources.list
-else
-echo "non-free existant"
 fi
 
 ##maj proxmox + install outils
